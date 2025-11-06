@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Asia Access Control Co., Ltd.</title>
+  <style>
+    :root{
+      --primary:#0b1c2e;
+      --accent:#3ea76a;
+      --muted:#6b7280;
+      --bg:#f7f8fa;
+      --maxw:1200px;
+      --nav-height:64px;
+      --fade-duration:800ms;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif; color:#222; background:var(--bg); scroll-behavior:smooth}
+    a{color:inherit}
+    /* NAV */
+    nav{
+      position:fixed; top:0; left:0; right:0; height:var(--nav-height);
+      background:var(--primary); color:white; display:flex; align-items:center; justify-content:space-between;
+      padding:8px 20px; z-index:1200; box-shadow:0 2px 6px rgba(0,0,0,0.12)
+    }
+    .nav-left{display:flex; align-items:center; gap:14px}
+    .logo{display:flex; align-items:center; gap:10px; font-weight:700; font-size:1rem}
+    .logo img{height:36px; display:block}
+    .nav-right{display:flex; gap:16px; align-items:center}
+    .menu{list-style:none; display:flex; gap:16px; margin:0; padding:0}
+    .menu a{color:white; text-decoration:none; font-weight:600; font-size:0.95rem; padding:8px}
+    .menu a.active, .menu a:hover{color:var(--accent)}
+    .lang-toggle{background:transparent; border:1px solid rgba(255,255,255,0.12); color:white; padding:6px 10px; border-radius:18px; cursor:pointer; font-weight:700}
+    /* HERO SLIDES */
+    .hero-wrap{margin-top:var(--nav-height); position:relative; overflow:hidden; background:#0b1c2e}
+    .slides{position:relative; width:100%; height:360px; max-height:50vh}
+    .slide{
+      position:absolute; inset:0;
+      background-size:cover; background-position:center;
+      opacity:0; transition:opacity var(--fade-duration) ease-in-out;
+    }
+    .slide.visible{opacity:1}
+    .hero-overlay{
+      position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,28,46,0.55), rgba(11,28,46,0.65));
+      display:flex; align-items:center; justify-content:center; color:white; text-align:center; padding:28px;
+    }
+    .hero-content{max-width:var(--maxw); margin:auto}
+    .hero h1{font-size:2rem; margin:0 0 10px; line-height:1.05}
+    .hero h1 .accent{color:var(--accent)}
+    .hero p{max-width:920px; margin:0 auto 14px; color:rgba(255,255,255,0.95)}
+    .cta{display:inline-block; background:var(--accent); color:white; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:700}
+    /* slide controls */
+    .slide-dots{position:absolute; left:50%; transform:translateX(-50%); bottom:12px; display:flex; gap:8px}
+    .dot{width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.5); cursor:pointer; border:1px solid rgba(255,255,255,0.25)}
+    .dot.active{background:var(--accent); box-shadow:0 0 6px rgba(0,0,0,0.3)}
+    /* SECTION */
+    section{padding:56px 18px; background:transparent}
+    .container{max-width:var(--maxw); margin:0 auto}
+    h2{font-size:1.35rem; color:var(--primary); margin:0 0 12px; text-align:center}
+    p.lead{color:var(--muted); text-align:center; max-width:920px; margin:0 auto 18px}
+    .grid{display:grid; gap:18px}
+    .grid-4{grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))}
+    .card{background:white; padding:18px; border-radius:10px; box-shadow:0 1px 6px rgba(11,28,46,0.06)}
+    .card h3{margin:0 0 8px; color:var(--primary)}
+    ul.ul-clean{list-style:none; padding:0; margin:0; color:var(--muted)}
+    ul.ul-clean li{margin:8px 0}
+    /* partners row */
+    .partners{display:flex; gap:28px; align-items:center; justify-content:center; flex-wrap:wrap; padding-top:12px}
+    .partners img{height:56px; object-fit:contain}
+    /* industries */
+    .industries-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px}
+    .industry{background:white; padding:12px; border-radius:8px; text-align:center; box-shadow:0 1px 6px rgba(11,28,46,0.06)}
+    /* contact */
+    .contact-flex{display:flex; gap:28px; align-items:flex-start; flex-wrap:wrap}
+    .contact-info{flex:1; min-width:260px}
+    .contact-form{flex:1; min-width:260px; background:white; padding:16px; border-radius:8px; box-shadow:0 1px 6px rgba(11,28,46,0.06)}
+    .contact-form input, .contact-form textarea{width:100%; padding:10px; margin:8px 0; border:1px solid #e6e9ee; border-radius:6px; font-size:0.95rem}
+    .contact-form button{background:var(--accent); color:white; padding:10px 14px; border:none; border-radius:8px; cursor:pointer; font-weight:700}
+    /* footer */
+    footer{background:var(--primary); color:white; padding:24px 18px; text-align:center}
+    /* responsive */
+    @media (max-width:880px){
+      .menu{display:none}
+      .hero h1{font-size:1.6rem}
+      .slides{height:240px}
+      .contact-flex{flex-direction:column}
+      .logo img{height:30px}
+    }
+    /* accessible skip link */
+    .skip{position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden}
+    .skip:focus{left:10px; top:10px; background:#fff; z-index:2000; padding:6px 10px; border-radius:6px}
+  </style>
+</head>
+<body>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- NAV -->
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="nav-left">
+      <div class="logo" aria-hidden="false">
+        <img src="/images/AXClogo.png" alt="AsiaAccessControl logo" />
+        <!-- <img src="D:\DATAs\AXC_DATA\Website\version3\images\AXClogo.png" alt="AsiaAccessControl logo" /> -->
+        <span data-en="AsiaAccessControl" data-th="เอเชียแอคเซสคอนโทรล">AsiaAccessControl</span>
+      </div>
+    </div>
+
+    <div class="nav-right" role="menubar" aria-label="Primary menu">
+      <ul class="menu" role="none">
+        <li role="none"><a class="nav-link" role="menuitem" href="#home" data-en="Home" data-th="หน้าแรก">Home</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" href="#about" data-en="About" data_th="เกี่ยวกับเรา">About</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" href="#solutions" data-en="Solutions" data_th="โซลูชัน">Solutions</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" href="#why" data-en="Why Us" data_th="ทำไมต้องเรา">Why Us</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" href="#partners" data-en="Partners" data_th="พันธมิตร">Partners</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" href="#industries" data-en="Industries" data_th="กลุ่มลูกค้า">Industries</a></li>
+        <li role="none"><a class="nav-link" role="menuitem" href="#contact" data-en="Contact" data_th="ติดต่อเรา">Contact</a></li>
+      </ul>
+      <button id="lang-toggle" class="lang-toggle" aria-pressed="false" title="Toggle language">TH 🇹🇭</button>
+    </div>
+  </nav>
+<!-- D:\DATAs\AXC_DATA\Website\version3\images\ -->
+  <!-- HERO with slideshow -->
+  <div class="hero-wrap" id="home" tabindex="-1" role="banner">
+    <div class="slides" aria-hidden="false">
+      <div class="slide" id="slide-1" style="background-image:url('/images/hero_slide1.jpg')" aria-label="Slide 1"></div>
+      <div class="slide" id="slide-2" style="background-image:url('/images/hero_slide2.jpg')" aria-label="Slide 2"></div>
+      <div class="slide" id="slide-3" style="background-image:url('/images/hero_slide3.jpg')" aria-label="Slide 3"></div>
+      <!-- <div class="slide" id="slide-1" style="background-image:url('D:\DATAs\AXC_DATA\Website\version3\images\hero_slide1.jpg')" aria-label="Slide 1"></div>
+      <div class="slide" id="slide-2" style="background-image:url('D:\DATAs\AXC_DATA\Website\version3\images\hero_slide2.jpg')" aria-label="Slide 2"></div>
+      <div class="slide" id="slide-3" style="background-image:url('D:\DATAs\AXC_DATA\Website\version3\images\hero_slide3.jpg')" aria-label="Slide 3"></div> -->
+      
+      
+      <div class="hero-overlay">
+        <div class="hero-content container">
+          <h1 data-en="<span class='accent'>Secure Access.</span> Smarter Future." data_th="<span class='accent'>ความปลอดภัยอัจฉริยะ</span> เพื่ออนาคตที่ดีกว่า">
+            <span class="accent">Secure Access.</span> Smarter Future.
+          </h1>
+          <p class="lead" data-en="We design and deliver intelligent security systems — from biometric identification and access control to advanced CCTV and custom software — to help organizations stay safe, efficient, and connected."
+                    data_th="เราพัฒนาและติดตั้งระบบรักษาความปลอดภัยอัจฉริยะ ตั้งแต่ระบบควบคุมการเข้าออก ชีวมิติ กล้องวงจรปิด และซอฟต์แวร์เฉพาะทาง เพื่อให้องค์กรของคุณปลอดภัยและมีประสิทธิภาพ">
+            We design and deliver intelligent security systems — from biometric identification and access control to advanced CCTV and custom software — to help organizations stay safe, efficient, and connected.
+          </p>
+          <a class="cta" href="#solutions" data-en="Discover Our Solutions" data_th="ดูโซลูชันของเรา">Discover Our Solutions</a>
+        </div>
+      </div>
+
+      <div class="slide-dots" aria-hidden="false" role="tablist" aria-label="Slide dots">
+        <div class="dot" data-index="0" role="tab" aria-selected="true" title="Slide 1"></div>
+        <div class="dot" data-index="1" role="tab" aria-selected="false" title="Slide 2"></div>
+        <div class="dot" data-index="2" role="tab" aria-selected="false" title="Slide 3"></div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ABOUT -->
+    <section id="about" class="container" aria-labelledby="about-heading">
+      <h2 id="about-heading" data-en="About Us" data_th="เกี่ยวกับเรา">About Us</h2>
+      <p class="lead" data-en="Asia Access Control Co., Ltd. is a trusted provider of physical security and biometric access control solutions in Thailand. We are an authorized reseller of ZKTeco and a Dahua CCTV solution partner. Our expertise covers access control system design, biometric identification (iris, face, fingerprint), CCTV installation, and software development — including client/server, web, and mobile applications."
+                   data_th="บริษัท เอเชีย แอคเซส คอนโทรล จำกัด เป็นผู้ให้บริการระบบรักษาความปลอดภัยและการควบคุมการเข้าออกด้วยชีวมิติที่เชื่อถือได้ในประเทศไทย เป็นตัวแทนจำหน่าย ZKTeco และพันธมิตรโซลูชัน Dahua เรามีความเชี่ยวชาญด้านการออกแบบระบบควบคุมการเข้าออก การระบุตัวตนด้วยชีวมิติ (ม่านตา ใบหน้า ลายนิ้วมือ) การติดตั้ง CCTV และการพัฒนาซอฟต์แวร์ทั้ง Client/Server, เว็บ และมือถือ">
+        Asia Access Control Co., Ltd. is a trusted provider...
+      </p>
+    </section>
+
+    <!-- SOLUTIONS -->
+    <section id="solutions" class="container" aria-labelledby="solutions-heading">
+      <h2 id="solutions-heading" data-en="Our Solutions" data_th="โซลูชันของเรา">Our Solutions</h2>
+      <div class="grid grid-4" style="margin-top:18px">
+        <div class="card">
+          <h3 data-en="Access Control Systems" data_th="ระบบควบคุมการเข้าออก">Access Control Systems</h3>
+          <p data-en="Advanced solutions for secure entry management — from doors to enterprise-wide access." data_th="โซลูชันสำหรับการควบคุมการเข้าออก ตั้งแต่ประตูเดียวจนถึงระบบแบบองค์กร">Advanced solutions for secure entry management — from doors to enterprise-wide access.</p>
+        </div>
+        <div class="card">
+          <h3 data-en="Biometric Identification" data_th="การยืนยันตัวตนด้วยชีวมิติ">Biometric Identification</h3>
+          <p data-en="Reliable identity verification using iris, face, and fingerprint technologies." data_th="การยืนยันตัวตนที่แม่นยำด้วยม่านตา ใบหน้า และลายนิ้วมือ">Reliable identity verification using iris, face, and fingerprint technologies.</p>
+        </div>
+        <div class="card">
+          <h3 data-en="CCTV & Surveillance" data_th="กล้องวงจรปิดและระบบเฝ้าระวัง">CCTV & Surveillance</h3>
+          <p data-en="High-definition monitoring and remote viewing using Dahua smart CCTV systems." data_th="การเฝ้าระวังความละเอียดสูงและการดูภาพระยะไกลด้วยระบบกล้อง Dahua">High-definition monitoring and remote viewing using Dahua smart CCTV systems.</p>
+        </div>
+        <div class="card">
+          <h3 data-en="Custom Software Development" data_th="การพัฒนาโปรแกรมเฉพาะทาง">Custom Software Development</h3>
+          <p data-en="Tailor-made applications that integrate with your security systems — client/server, web, or mobile." data_th="พัฒนาแอปพลิเคชันเฉพาะที่ผสานกับระบบรักษาความปลอดภัยของคุณทั้งแบบ Client/Server, เว็บ และมือถือ">Tailor-made applications that integrate with your security systems — client/server, web, or mobile.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why" class="container" aria-labelledby="why-heading">
+      <h2 id="why-heading" data-en="Why Choose Us" data_th="ทำไมต้องเลือกเรา">Why Choose Us</h2>
+      <p class="lead" data-en="We are more than a security vendor — we are your trusted partner in building safer, smarter spaces." data_th="เราไม่ได้เป็นเพียงผู้ขายระบบความปลอดภัย แต่เป็นพันธมิตรที่คุณวางใจได้ในการสร้างสภาพแวดล้อมที่ปลอดภัยและชาญฉลาด">We are more than a security vendor — we are your trusted partner in building safer, smarter spaces.</p>
+      <div style="max-width:920px;margin:18px auto 0">
+        <ul class="ul-clean">
+          <li><strong data-en="Proven Expertise" data_th="ความเชี่ยวชาญที่พิสูจน์ได้">Proven Expertise</strong> — <span data-en="Years of experience in access control, biometrics and system integration." data_th="ประสบการณ์ยาวนานด้านระบบควบคุมการเข้าออก ชีวมิติ และการบูรณาการระบบ">Years of experience in access control, biometrics and system integration.</span></li>
+          <li><strong data-en="Authorized Partnerships" data_th="พันธมิตรที่ได้รับการรับรอง">Authorized Partnerships</strong> — <span data-en="Official reseller of ZKTeco and Dahua Technology." data_th="ตัวแทนจำหน่าย ZKTeco และพันธมิตร Dahua อย่างเป็นทางการ">Official reseller of ZKTeco and Dahua Technology.</span></li>
+          <li><strong data-en="End-to-End Solutions" data_th="บริการครบวงจร">End-to-End Solutions</strong> — <span data-en="From consultation and design to installation and maintenance." data_th="ให้บริการตั้งแต่ให้คำปรึกษา ออกแบบ ติดตั้ง และบำรุงรักษา">From consultation and design to installation and maintenance.</span></li>
+          <li><strong data-en="Custom Software" data_th="ซอฟต์แวร์เฉพาะทาง">Custom Software</strong> — <span data-en="In-house development for seamless integration with security hardware." data_th="การพัฒนาภายในเพื่อเชื่อมต่อกับฮาร์ดแวร์อย่างสมบูรณ์">In-house development for seamless integration with security hardware.</span></li>
+          <li><strong data-en="Dedicated Support" data_th="บริการหลังการขาย">Dedicated Support</strong> — <span data-en="Reliable after-sales service to keep your systems running smoothly." data_th="บริการหลังการขายที่เชื่อถือได้เพื่อให้ระบบทำงานอย่างต่อเนื่อง">Reliable after-sales service to keep your systems running smoothly.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners" class="container" aria-labelledby="partners-heading">
+      <h2 id="partners-heading" data-en="Our Trusted Partners" data_th="พันธมิตรของเรา">Our Trusted Partners</h2>
+      <p class="lead" data-en="We work with world-class technology providers to deliver reliable, future-ready security solutions." data_th="เราร่วมมือกับผู้ให้บริการเทคโนโลยีระดับโลกเพื่อมอบโซลูชันที่เชื่อถือได้และรองรับอนาคต">We work with world-class technology providers to deliver reliable, future-ready security solutions.</p>
+      <div class="partners" style="margin-top:12px" role="presentation">
+        <img src="/images/zkteco-logo.png" alt="ZKTeco logo" onerror="this.style.opacity=0.5;"/>
+        <img src="/images/Dahualogo.png" alt="Dahua Technology logo" />
+
+        <!-- <img src="D:\DATAs\AXC_DATA\Website\version3\images\ZKlogo.png" alt="ZKTeco logo" onerror="this.style.opacity=0.5;"/>
+        <img src="D:\DATAs\AXC_DATA\Website\version3\images\Dahualogo.png" alt="Dahua Technology logo" /> -->
+      </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section id="industries" class="container" aria-labelledby="industries-heading">
+      <h2 id="industries-heading" data-en="Industries We Serve" data_th="กลุ่มลูกค้าที่ให้บริการ">Industries We Serve</h2>
+      <p class="lead" data-en="Our solutions are trusted across many industries — from offices to hospitals and public organizations." data_th="โซลูชันของเราได้รับความไว้วางใจจากหลากหลายอุตสาหกรรม ตั้งแต่สำนักงานไปจนถึงโรงพยาบาลและองค์กรภาครัฐ">Our solutions are trusted across many industries — from offices to hospitals and public organizations.</p>
+      <div class="industries-grid" style="margin-top:16px">
+        <div class="industry" data-en="Corporate Offices & Commercial Buildings" data_th="สำนักงานและอาคารพาณิชย์">Corporate Offices & Commercial Buildings</div>
+        <div class="industry" data-en="Factories & Industrial Facilities" data_th="โรงงานและสถานประกอบการ">Factories & Industrial Facilities</div>
+        <div class="industry" data-en="Schools & Universities" data_th="โรงเรียนและมหาวิทยาลัย">Schools & Universities</div>
+        <div class="industry" data-en="Hospitals & Healthcare Centers" data_th="โรงพยาบาลและศูนย์สุขภาพ">Hospitals & Healthcare Centers</div>
+        <div class="industry" data-en="Government & Public Organizations" data_th="หน่วยงานราชการ">Government & Public Organizations</div>
+        <div class="industry" data-en="Residential & Property Projects" data_th="โครงการที่อยู่อาศัย">Residential & Property Projects</div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" data-en="Let’s Talk About Your Security Needs" data_th="พูดคุยเกี่ยวกับความต้องการด้านความปลอดภัย">Let’s Talk About Your Security Needs</h2>
+      <p class="lead" data-en="Contact us for a consultation — we’ll recommend the right technologies to secure people, places, and data." data_th="ติดต่อเราเพื่อขอคำปรึกษา — เราจะแนะนำเทคโนโลยีที่เหมาะสมสำหรับการปกป้องบุคลากร สถานที่ และข้อมูลของคุณ">Contact us for a consultation — we’ll recommend the right technologies to secure people, places, and data.</p>
+
+      <div class="contact-flex" style="margin-top:18px">
+        <div class="contact-info card">
+          <h3 data-en="Contact Information" data_th="ข้อมูลการติดต่อ">Contact Information</h3>
+          <p><strong data-en="Asia Access Control Co., Ltd." data_th="บริษัท เอเชีย แอคเซส คอนโทรล จำกัด">Asia Access Control Co., Ltd.</strong><br>
+          <span data-en="194/66 Buddabucha 36 Rd., Bangmod, Thungkru, Bangkok 10140" data_th="194/66 ถนนพุทธบูชา 36 แขวงบางมด เขตทุ่งครุ กรุงเทพมหานคร 10140">194/66 Buddabucha 36 Rd., Bangmod, Thungkru, Bangkok 10140</span><br>
+          <span>📧 <a href="mailto:pokkhrong@asiaacces.com">pokkhrong@asiaacces.com</a> | 📞 <a href="tel:+662XXX">+66 (0)2-XXX-XXXX</a></span></p>
+
+          <h4 data-en="Business Hours" data_th="เวลาทำการ">Business Hours</h4>
+          <p data-en="Monday – Friday | 9:00 AM – 6:00 PM" data_th="จันทร์ – ศุกร์ | 9:00 น. – 18:00 น.">Monday – Friday | 9:00 AM – 6:00 PM</p>
+        </div>
+
+        <div class="contact-form">
+          <form id="contactForm" onsubmit="return false;">
+            <label for="name" data-en="Name" data_th="ชื่อ">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required />
+
+            <label for="company" data-en="Company (optional)" data_th="บริษัท (ไม่บังคับ)">Company (optional)</label>
+            <input id="company" name="company" type="text" placeholder="Company" />
+
+            <label for="email" data-en="Email" data_th="อีเมล">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+
+            <label for="message" data-en="Message" data_th="ข้อความ">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your project or request" required></textarea>
+
+            <button type="submit" id="sendBtn" data-en="Send Message" data_th="ส่งข้อความ">Send Message</button>
+            <p id="formNote" style="margin-top:10px;color:var(--muted);font-size:0.95rem" data-en="(This form is a demo. Configure server-side handling.)" data_th="(แบบฟอร์มนี้เป็นตัวอย่าง กรุณาติดตั้งการส่งข้อมูลฝั่งเซิร์ฟเวอร์)">(This form is a demo. Configure server-side handling.)</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <small>© <span id="year">2025</span> Asia Access Control Co., Ltd. All rights reserved.</small>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      // --- Language toggle & populate ---
+      const langBtn = document.getElementById('lang-toggle');
+      let lang = 'en';
+      function setTextByLang(l){
+        document.querySelectorAll('[data-en]').forEach(el=>{
+          const en = el.getAttribute('data-en') || '';
+          const th = el.getAttribute('data_th') || el.getAttribute('data-th') || en;
+          el.innerHTML = (l === 'en') ? en : th;
+        });
+        langBtn.setAttribute('aria-pressed', l === 'th' ? 'true' : 'false');
+        langBtn.textContent = (l === 'en') ? 'TH 🇹🇭' : 'EN 🇬🇧';
+        lang = l;
+      }
+      langBtn.addEventListener('click', ()=> setTextByLang(lang === 'en' ? 'th' : 'en'));
+      setTextByLang('en');
+
+      // --- Active nav highlight using IntersectionObserver ---
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = Array.from(document.querySelectorAll('main section, .hero-wrap'));
+      const options = { root: null, rootMargin: '0px', threshold: 0.55 };
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const id = entry.target.id;
+            navLinks.forEach(a=>{
+              const href = a.getAttribute('href').slice(1);
+              if(href === id){
+                a.classList.add('active');
+                a.setAttribute('aria-current','true');
+              } else {
+                a.classList.remove('active');
+                a.removeAttribute('aria-current');
+              }
+            });
+          }
+        });
+      }, options);
+      sections.forEach(sec => observer.observe(sec));
+
+      // --- Smooth anchor scroll with offset for fixed nav ---
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', function(e){
+          const targetId = this.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if(target){
+            e.preventDefault();
+            const navHeight = window.innerWidth <= 880 ? 56 : parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 64;
+            const rect = target.getBoundingClientRect();
+            const absoluteY = window.scrollY + rect.top - navHeight + 6;
+            window.scrollTo({top: absoluteY, behavior: 'smooth'});
+            setTimeout(()=> target.focus({preventScroll:true}), 600);
+          }
+        });
+      });
+
+      // --- Hero slideshow (auto-rotate + dots) ---
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      let current = 0;
+      const INTERVAL = 5000; // 5s
+      let timer = null;
+
+      function showSlide(idx){
+        slides.forEach((s,i)=> s.classList.toggle('visible', i===idx));
+        dots.forEach((d,i)=> { d.classList.toggle('active', i===idx); d.setAttribute('aria-selected', i===idx?'true':'false'); });
+        current = idx;
+      }
+      function nextSlide(){
+        showSlide((current + 1) % slides.length);
+      }
+      // init
+      showSlide(0);
+      timer = setInterval(nextSlide, INTERVAL);
+
+      // dot click
+      dots.forEach(dot=>{
+        dot.addEventListener('click', ()=>{
+          const i = parseInt(dot.getAttribute('data-index'),10);
+          showSlide(i);
+          clearInterval(timer);
+          timer = setInterval(nextSlide, INTERVAL);
+        });
+      });
+
+      // Pause on hover (optional)
+      const slidesWrap = document.querySelector('.slides');
+      slidesWrap.addEventListener('mouseenter', ()=> clearInterval(timer));
+      slidesWrap.addEventListener('mouseleave', ()=> { clearInterval(timer); timer = setInterval(nextSlide, INTERVAL); });
+
+      // --- Contact form demo handling ---
+      const form = document.getElementById('contactForm');
+      form.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        const sendBtn = document.getElementById('sendBtn');
+        sendBtn.disabled = true;
+        sendBtn.textContent = (lang === 'en') ? 'Sending...' : 'กำลังส่ง...';
+        setTimeout(()=>{
+          alert((lang === 'en') ? 'Message sent (demo).' : 'ส่งข้อความเรียบร้อย (ตัวอย่าง)');
+          sendBtn.disabled = false;
+          sendBtn.textContent = (lang === 'en') ? 'Send Message' : 'ส่งข้อความ';
+          form.reset();
+        }, 900);
+      });
+
+      // Set current year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+
+</body>
+</html>
