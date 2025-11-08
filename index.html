@@ -248,21 +248,19 @@
         </div>
 
         <div class="contact-form">
-          <form id="contactForm" onsubmit="return false;">
-            <label for="name" data-en="Name" data_th="ชื่อ">Name</label>
+          <form id="contactForm" action="https://formspree.io/f/mabcdxyz" method="POST">
+            <label for="name">Name</label>
             <input id="name" name="name" type="text" placeholder="Your name" required />
-
-            <label for="company" data-en="Company (optional)" data_th="บริษัท (ไม่บังคับ)">Company (optional)</label>
+            <label for="company">Company (optional)</label>
             <input id="company" name="company" type="text" placeholder="Company" />
-
-            <label for="email" data-en="Email" data_th="อีเมล">Email</label>
-            <input id="email" name="email" type="email" placeholder="you@example.com" required />
-
-            <label for="message" data-en="Message" data_th="ข้อความ">Message</label>
+            <label for="email">Email</label>
+            <input id="email" name="_replyto" type="email" placeholder="you@example.com" required />
+            <label for="message">Message</label>
             <textarea id="message" name="message" rows="4" placeholder="Tell us about your project or request" required></textarea>
-
-            <button type="submit" id="sendBtn" data-en="Send Message" data_th="ส่งข้อความ">Send Message</button>
-            <p id="formNote" style="margin-top:10px;color:var(--muted);font-size:0.95rem" data-en="(This form is a demo. Configure server-side handling.)" data_th="(แบบฟอร์มนี้เป็นตัวอย่าง กรุณาติดตั้งการส่งข้อมูลฝั่งเซิร์ฟเวอร์)">(This form is a demo. Configure server-side handling.)</p>
+            <button type="submit" id="sendBtn">Send Message</button>
+            <p id="formNote" style="margin-top:10px;color:var(--muted);font-size:0.95rem">
+              (Your message will be sent directly to our inbox.)
+            </p>
           </form>
         </div>
       </div>
